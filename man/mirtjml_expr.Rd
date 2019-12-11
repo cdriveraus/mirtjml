@@ -5,7 +5,7 @@
 \title{Constrained joint maximum likelihood estimation for exploratory item factor analysis on the multidimensional two parameter logistic model.}
 \usage{
 mirtjml_expr(response, K, theta0 = NULL, A0 = NULL, d0 = NULL,
-  cc = NULL, tol = 1e-04, print_proc = TRUE, parallel = FALSE)
+  cc = NULL, tol = 5, print_proc = TRUE)
 }
 \arguments{
 \item{response}{N by J matrix containing 0/1/NA responses, where N is the number of respondents, J is the number of items, and NA indicates a missing response.}
@@ -20,11 +20,9 @@ mirtjml_expr(response, K, theta0 = NULL, A0 = NULL, d0 = NULL,
 
 \item{cc}{A constant constraining the magnitude of the norms of person and item parameter vectors.}
 
-\item{tol}{The tolerance for convergence with a default value 1e-4.}
+\item{tol}{The tolerance for convergence with a default value 5.}
 
-\item{print_proc}{Print the precision during the esitmation procedure with a default value TRUE.}
-
-\item{parallel}{Whether or not enable the parallel computing with a default value FALSE.}
+\item{print_proc}{Print the precision during the estimation procedure with a default value TRUE.}
 }
 \value{
 The function returns a list with the following components:
@@ -40,6 +38,9 @@ Constrained joint maximum likelihood estimation for exploratory item factor anal
 \examples{
 # load a simulated dataset
 attach(data_sim)
+
+# use all available cores by running
+# setMIRTthreads(-1)
 
 # run the exploratory analysis
 res <- mirtjml_expr(response, K)

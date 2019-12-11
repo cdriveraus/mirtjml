@@ -1,5 +1,20 @@
 
 ** updates
+### 11 Dec, 2019
+- fix a convergence rate issue
+- reconstruct a safer way to perform multi-threads computing in R environment without affecting other packages
+- perform an initialize procedure to determine proper step sizes for optimization for a better performance
+- update the status of cited papers
+
+### 18 Mar, 2019
+- fix optimization stability bug when dimension is large
+
+
+### 30 Dec, 2018
+- optimized dependent functions
+- adaptively choose initial step sizes, this could speed up examples one time
+
+
 ### 11 Oct, 2018
 - fix cran comments: to link the preprint from the CRAN webpage, add angle brackets around arxiv reference
 - update Github repository link
