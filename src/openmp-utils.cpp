@@ -17,12 +17,25 @@ int getmirtjml_threads() {
   return mirtjml_threads;
 }
 // [[Rcpp::export]]
+bool hasOpenMP() {
+  // Just for use by onAttach (hence nocov) to avoid an RPRINTF from C level which isn't suppressable by CRAN
+  // There is now a 'grep' in CRAN_Release.cmd to detect any use of RPRINTF in init.c, which is
+  // why RPRINTF is capitalized in this comment to avoid that grep.
+  // TODO: perhaps .Platform or .Machine in R itself could contain whether OpenMP is available.
+#ifdef _OPENMP
+  return 1;
+#else
+  return 0;
+#endif
+}
+
+// [[Rcpp::export]]
 int setmirtjml_threads(int threads = -1) {
   // this is the main getter used by all parallel regions; they specify num_threads(getDTthreads())
   // Therefore keep it light, simple and robust. Local static variable. initDTthreads() ensures 1 <= DTthreads <= omp_get_num_proc()
-#ifndef _OPENMP
-  Rprintf("This installation of mirtjml has not been compiled with OpenMP support.\n");
-#endif
+// #ifndef _OPENMP
+//   Rprintf("This installation of mirtjml has not been compiled with OpenMP support.\n");
+// #endif
   int old = mirtjml_threads;
   if(threads == -1){
     mirtjml_threads = omp_get_num_procs();
