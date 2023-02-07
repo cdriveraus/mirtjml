@@ -55,7 +55,7 @@ mirtjml_conf <- function(response, Q, theta0, A0, d0, cc = NULL, tol = 5, print_
   }
   # scaling
   tmp <- sqrt(diag(cov(res$theta)))
-  return(list("theta_hat" = res$theta %*% diag(1/tmp,nrow(res$theta)),
+  return(list("theta_hat" = res$theta %*% diag(1/tmp,ncol(res$theta)),
               "A_hat" = res$A %*% diag(tmp),
               "d_hat" = res$d))
 }
